@@ -144,7 +144,7 @@ class PHPMP3
 				break;
 			}
 		}
-		$mp3 = new mp3();
+		$mp3 = new PHPMP3();
 		if($endCount == -1)
 		{
 			$endCount = $maxStrLen - $startCount;
@@ -540,9 +540,9 @@ class PHPMP3
     {
         foreach ($array as $path)
         {
-            $mp3 = new mp3($path);
+            $mp3 = new PHPMP3($path);
             $mp3->striptags();
-            $mp3_1 = new mp3($newpath);
+            $mp3_1 = new PHPMP3($newpath);
             $mp3->mergeBehind($mp3_1);
             $mp3->save($newpath);
         }
