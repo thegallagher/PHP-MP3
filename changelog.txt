@@ -1,0 +1,10 @@
+Change Log
+----------
+* Forked from http://www.ClickFM.co.il/temp/ofer/mp3.txt (dead link, retrieved from http://web.archive.org/web/http://www.ClickFM.co.il/temp/ofer/mp3.txt)
+* Suggested change from kamilmajewski (26-12-2008 12:45) in comments from http://www.sourcerally.net/Scripts/20-PHP-MP3-Class.
+* Usage comments removed.
+* Some code formatting changes.
+* Class name changed from mp3 to PHPMP3
+* Constructor renamed to __construct
+* Fixed "Notice: Undefined variable: frameLength" in doFrameStuff()
+* Merged multiJoin() from http://www.sourcerally.net/Scripts/20-PHP-MP3-Class
