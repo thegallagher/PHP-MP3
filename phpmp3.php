@@ -1,10 +1,13 @@
 <?php	
 /*
+ * PHPMP3
+ * 
+ * Version 0.9.0
+ * 
  * Modified version mp3 class from http://www.sourcerally.net/Scripts/20-PHP-MP3-Class
  * This version was at http://www.ClickFM.co.il/temp/ofer/mp3.txt (dead link, retrieved from http://web.archive.org/web/http://www.ClickFM.co.il/temp/ofer/mp3.txt)
  * Suggested change from kamilmajewski (26-12-2008 12:45) in comments from http://www.sourcerally.net/Scripts/20-PHP-MP3-Class.
- * Usage comments removed. Some code formatting changes. Added obvious TODO changes. Corrected class case.
- * Licence: LGPL? (no licence information available, however original is LGPL)
+ * Licence: LGPL
  */
 
 // TODO: Use fopen and fseek instead of reading in the whole file all at once.
@@ -13,9 +16,16 @@ class PHPMP3
 	private $str;
 	private $time;
 	private $frames;
+	private $binaryTable;
 	
 	public function __construct($path = '')
 	{
+		$this->binaryTable = array();
+		for($i = 0; $i < 256; $i++)
+		{
+			$this->binaryTable[chr($i)] = sprintf('%08b', $i);
+		}
+		
 		if($path != '')
 		{
 			$this->str = file_get_contents($path);
@@ -43,7 +53,7 @@ class PHPMP3
 			$parts = array();
 			for($i = 0; $i < $strlen; $i++)
 			{
-				$parts[] = $this->decbinFill(ord($str[$i]), 8);
+				$parts[] = $this->binaryTable[$str[$i]];
 			}
 
 			if ($this->doFrameStuff($parts) === false)
@@ -69,7 +79,7 @@ class PHPMP3
 			$parts = array();
 			for($i = 0; $i < $strlen; $i++)
 			{
-				$parts[] = $this->decbinFill(ord($str[$i]), 8);
+				$parts[] = $this->binaryTable[$str[$i]];
 			}
 			
 			if($parts[0] != '11111111')
@@ -113,26 +123,14 @@ class PHPMP3
 			{
 				$endCount = $currentStrPos - $startCount;
 			}
-			$doFrame = true;
 			$str = substr($this->str, $currentStrPos, 4);
 			$strlen = strlen($str);
 			$parts = array();
 			for($i = 0; $i < $strlen; $i++)
 			{
-				$parts[] = $this->decbinFill(ord($str[$i]), 8);
+				$parts[] = $this->binaryTable[$str[$i]];
 			}
-			if($parts[0] != '11111111')
-			{
-				if(($maxStrLen-128) > $currentStrPos)
-				{
-					$doFrame = false;
-				}
-				else
-				{
-					$doFrame = false;
-				}
-			}
-			if($doFrame)
+			if($parts[0] == '11111111')
 			{
 				$a = $this->doFrameStuff($parts);
 				$currentStrPos += $a[0];
@@ -154,20 +152,6 @@ class PHPMP3
 			$mp3->setStr(substr($this->str, $startCount, $endCount));
 		}
 		return $mp3;
-	}
-	
-	private function decbinFill($dec, $length = 0)
-	{
-		$str = decbin($dec);
-		$nulls = $length - strlen($str);
-		if($nulls > 0)
-		{
-			for($i = 0; $i < $nulls; $i++)
-			{
-				$str = '0' . $str;
-			}
-		}
-		return $str;
 	}
 	
 	private function doFrameStuff($parts)
@@ -289,7 +273,6 @@ class PHPMP3
 		$padding = substr($parts[2], 6, 1);
 		if($layer == 3 || $layer == 2)
 		{
-			//FrameLengthInBytes = 144 * BitRate / SampleRate + Padding //  TODO: remove this line
 			$frameLength = 144 * $bitRate * 1000 / $freq + $padding;
 		}
 		$frameLength = floor($frameLength);
@@ -531,12 +514,13 @@ class PHPMP3
 	public function save($path)
 	{
 		$fp = fopen($path, 'w');
-		fwrite($fp, $this->str);
+		$bytesWritten = fwrite($fp, $this->str);
 		fclose($fp);
+		return $bytesWritten == strlen($this->str);
 	}
 	
 	//join various MP3s
-    public function multiJoin($newpath,$array)
+    public function multiJoin($newpath, $array)
     {
         foreach ($array as $path)
         {
