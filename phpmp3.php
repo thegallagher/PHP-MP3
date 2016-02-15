@@ -124,7 +124,7 @@ class PHPMP3
                 break;
             }
         }
-        $mp3 = new PHPMP3();
+        $mp3 = new static();
         if ($endCount == - 1) {
             $endCount = $maxStrLen - $startCount;
         }
@@ -292,12 +292,12 @@ class PHPMP3
         $this->str = $str . $this->str;
     }
 
-    public function mergeBehind(mp3 $mp3)
+    public function mergeBehind(self $mp3)
     {
         $this->str .= $mp3->str;
     }
 
-    public function mergeInfront(mp3 $mp3)
+    public function mergeInfront(self $mp3)
     {
         $this->str = $mp3->str . $this->str;
     }
@@ -343,9 +343,9 @@ class PHPMP3
     public function multiJoin($newpath, $array)
     {
         foreach ($array as $path) {
-            $mp3 = new PHPMP3($path);
+            $mp3 = new static($path);
             $mp3->striptags();
-            $mp3_1 = new PHPMP3($newpath);
+            $mp3_1 = new static($newpath);
             $mp3->mergeBehind($mp3_1);
             $mp3->save($newpath);
         }
