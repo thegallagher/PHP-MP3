@@ -39,6 +39,7 @@ Todo
 * Add tests
 * Use fopen and fseek instead of reading in the whole file all at once.
 * Implement PSR-0 and PSR-4
+* Add composer
 * Create separate classes for manipulating ID3 and cutting mp3s
 * Deprecate setIdv3_2 and replace with method which can write each tag individually
 
