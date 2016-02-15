@@ -302,166 +302,7 @@ class PHPMP3
 		$yearLength 		= (int) (strlen($year) + 1);
 		
 		// TODO: There must be a better way to do this.
-		$str .= chr(73);//I
-		$str .= chr(68);//D
-		$str .= chr(51);//3
-		$str .= chr(3);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(8);//.
-		$str .= chr(53);//5
-		$str .= chr(84);//T
-		$str .= chr(82);//R
-		$str .= chr(67);//C
-		$str .= chr(75);//K
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($trackLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $track;
-		$str .= chr(84);//T
-		$str .= chr(69);//E
-		$str .= chr(78);//N
-		$str .= chr(67);//C
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($encodedByLength);//
-		$str .= chr(64);//@
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $encodedBy;
-		$str .= chr(87);//W
-		$str .= chr(88);//X
-		$str .= chr(88);//X
-		$str .= chr(88);//X
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($urlLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $url;
-		$str .= chr(84);//T
-		$str .= chr(67);//C
-		$str .= chr(79);//O
-		$str .= chr(80);//P
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($copyrightLength);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $copyright;
-		$str .= chr(84);//T
-		$str .= chr(79);//O
-		$str .= chr(80);//P
-		$str .= chr(69);//E
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($origArtistLength);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $origArtist;
-		$str .= chr(84);//T
-		$str .= chr(67);//C
-		$str .= chr(79);//O
-		$str .= chr(77);//M
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($composerLength);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $composer;
-		$str .= chr(67);//C
-		$str .= chr(79);//O
-		$str .= chr(77);//M
-		$str .= chr(77);//M
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($commentsLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(9);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $comments;
-		$str .= chr(84);//T
-
-		$str .= chr(67);//C
-		$str .= chr(79);//O
-		$str .= chr(78);//N
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($genreLength);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $genre;
-		$str .= chr(84);//T
-		$str .= chr(89);//Y
-		$str .= chr(69);//E
-		$str .= chr(82);//R
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($yearLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $year;
-		$str .= chr(84);//T
-		$str .= chr(65);//A
-		$str .= chr(76);//L
-		$str .= chr(66);//B
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($albumLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $album;
-		$str .= chr(84);//T
-		$str .= chr(80);//P
-		$str .= chr(69);//E
-		$str .= chr(49);//1
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($artistLength);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $artist;
-		$str .= chr(84);//T
-		$str .= chr(73);//I
-		$str .= chr(84);//T
-		$str .= chr(50);//2
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr($titleLength);//.
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= chr(0);//
-		$str .= $title;
+		$str .= "ID3\x03\0\0\0\0\x085TRCK\0\0\0{$trackLength}\0\0\0{$track}TENC\0\0\0{$encodedByLength}@\0\0{$encodedBy}WXXX\0\0\0{$urlLength}\0\0\0\0{$url}TCOP\0\0\0{$copyrightLength}\0\0\0{$copyright}TOPE\0\0\0{$origArtistLength}\0\0\0{$origArtist}TCOM\0\0\0{$composerLength}\0\0\0{$composer}COMM\0\0\0{$commentsLength}\0\0\0\0\x09\0\0{$comments}TCON\0\0\0{$genreLength}\0\0\0{$genre}TYER\0\0\0{$yearLength}\0\0\0{$year}TALB\0\0\0{$albumLength}\0\0\0{$album}TPE1\0\0\0{$artistLength}\0\0\0{$artist}TIT2\0\0\0{$titleLength}\0\0\0{$title}";
 		$this->str = $str . $this->str;
 	}
 	
@@ -520,15 +361,13 @@ class PHPMP3
 	}
 	
 	//join various MP3s
-    public function multiJoin($newpath, $array)
-    {
-        foreach ($array as $path)
-        {
-            $mp3 = new PHPMP3($path);
-            $mp3->striptags();
-            $mp3_1 = new PHPMP3($newpath);
-            $mp3->mergeBehind($mp3_1);
-            $mp3->save($newpath);
+    public function multiJoin($newpath, $array) {
+        foreach ($array as $path) {
+            $mp3 = new PHPMP3 ($path);
+            $mp3->striptags ();
+            $mp3_1 = new PHPMP3 ($newpath);
+            $mp3->mergeBehind ($mp3_1);
+            $mp3->save ($newpath);
         }
     }
 }
